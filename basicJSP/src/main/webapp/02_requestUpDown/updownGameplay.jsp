@@ -1,30 +1,31 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ page import="java.util.Random" %>
+<%@page import="java.util.Random"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%
-    // 세션에서 랜덤 값 가져오기
-    Integer targetNumber = (Integer) session.getAttribute("targetNumber");
 
-    // 처음 게임을 시작할 때만 랜덤 값 생성
-    if (targetNumber == null) {
-        Random random = new Random();
-        targetNumber = random.nextInt(100) + 1; // 1~100 사이의 숫자 생성
-        session.setAttribute("targetNumber", targetNumber); // 세션에 저장
-    }
-%>
+int rdNum = 0;
+if(request.getParameter("com") == null ){
+  Random rd = new Random();
+   rdNum =rd.nextInt(100)+1;
+}else{
+	rdNum = Integer.parseInt(request.getParameter("com"));
+}
 
+%>    
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>업다운게임</title>
+<meta charset="UTF-8">
+<title>게임 화면</title>
 </head>
 <body>
-    <h2>업다운게임</h2>
-    <p>치트키 : <%= targetNumber %></p>
-    
-    <form action="updownGameplayPro.jsp" method="post">
-        <input type="number" name="userGuess" required>
-        <input type="submit" value="전송">
-    </form>
+
+<p> 치트키 <%=rdNum %></p>
+<form action="updownGameplayPro.jsp" method="post">
+<input type="number" name="me" min="1" max="100" required />
+<input type="hidden" name="com" value=<%=rdNum %> />
+<button> 확인 </button>
+</form>
+
 </body>
 </html>

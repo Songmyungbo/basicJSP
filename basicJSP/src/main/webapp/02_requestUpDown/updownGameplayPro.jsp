@@ -1,33 +1,53 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%
-    Integer targetNumber = (Integer) session.getAttribute("targetNumber");
-    int userGuess = Integer.parseInt(request.getParameter("userGuess"));
-
-    String resultMessage = "";
-    if (userGuess < targetNumber) {
-        resultMessage = "내가 작다.";
-    } else if (userGuess > targetNumber) {
-        resultMessage = "내가 크다.";
-    } else {
-        resultMessage = "정답입니다. " + targetNumber;
-        session.removeAttribute("targetNumber"); // 정답 맞히면 세션에서 삭제 → 새 게임 시 새로운 숫자 생성
-    }
-%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+ <%
+ int me = 0;
+ int com = 0;
+ if(request.getParameter("me")!= null ){
+	 me = Integer.parseInt(request.getParameter("me"));
+	 com = Integer.parseInt(request.getParameter("com"));
+ }
+ String msg ="";
+ boolean pass = false;
+ 
+ if(me == com){
+	 msg="BINGO";
+	 pass = true;
+ }else if(me > com){
+	 msg="DOWN";
+ }else{
+	 msg="UP";
+ }
+  
+ %>
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>업다운 결과</title>
+<meta charset="UTF-8">
+<title>게임 확인 페이지 </title>
 </head>
 <body>
-    <h2>업다운게임</h2>
-    <p><%= resultMessage %></p>
-    
-    <% if (userGuess == targetNumber) { %>
-        <a href="index.jsp">처음으로</a>
-    <% } else { %>
-        <a href="updownGameplay.jsp">되돌아가기</a>
-    <% } %>
+
+<h1> <%= msg %> </h1>
+<% if(pass){ %>
+<a href="./index.jsp"> 처음으로 </a>
+<%}else{ %>
+	<a href="./updownGameplay.jsp?com=<%=com%>"> get방식 뒤로가기 </a>
+	<button id="btn"> get방식 자바스크립트 </button>
+	
+	<form action="./updownGameplay.jsp" method="post">
+	<input type="hidden" name="com" value=<%=com %> />
+		<button> post 방식으로 뒤로가기 </button>
+	</form>
+	
+	
+<%} %>
 </body>
 </html>
+<script>
+
+document.querySelector("#btn").addEventListener("click",()=>{
+	location.href="./updownGameplay.jsp?com=<%=com%>";
+} );
+
+</script>

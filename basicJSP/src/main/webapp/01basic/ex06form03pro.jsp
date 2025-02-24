@@ -1,24 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%
+
+String msg="";
+try{
+int num1 = Integer.parseInt(request.getParameter("su1"));
+int num2 = Integer.parseInt(request.getParameter("su2"));
+
+if(num1 > num2){
+	msg = num1 + "이 "+num2+" 보다 큽니다";
+}else if(num2 > num1){
+	msg = num2 + "이 "+num1+" 보다 큽니다";
+}else{
+	msg = num1 +"두 개가 같은 값입니다";
+}
+
+}catch(NumberFormatException e){
+	msg="비어있습니다";
+}
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>값 받는 실습폼</title>
+<title>값 받는 실습 process 페이지</title>
 </head>
 <body>
-<a href="./ex06form03pro.jsp?num1=10&num2=20">ex06formPro 이동</a>
-<%
-int number = 0;
+<!-- 다하면 pro 페이지 보내기   -->
+<h1><%= msg %></h1>
 
-if(request.getParameter("num1").equals("") || request.getParameter("num2").equals("")){
-	out.println("<h1>비어있는 값이 있습니다</h1>");
-}else if(number == 0){
-	number = Integer.parseInt(request.getParameter("num1")) > Integer.parseInt(request.getParameter("num2"))? Integer.parseInt(request.getParameter("num1")) : Integer.parseInt(request.getParameter("num2"));
-	out.println("<h1>" + number+ "값이 더 큽니다"+ "</h1>");
-}
+<a href="./ex07form04.jsp"> ex07form04.jsp 이동 </a>
 
-
-%>
 </body>
 </html>

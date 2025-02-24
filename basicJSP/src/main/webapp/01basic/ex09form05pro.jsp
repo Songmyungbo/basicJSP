@@ -1,54 +1,69 @@
+<%@page import="java.util.Arrays"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>학생 등록 처리</title>
+<title>학생 등록 처리 페이지</title>
 </head>
 <body>
 <%
 try{
-	int stuId = Integer.parseInt(request.getParameter("studentId"));
-	String name = request.getParameter("name");
-	String grade = request.getParameter("grade");
-	String subject = request.getParameter("subject");
-	String [] hobbi = request.getParameterValues("hobby");
-	String memo = request.getParameter("memo");
-	
-	String hobbyList = "";
-	if(hobbi != null){
-		for(int i = 0; i < hobbi.length; i++){
-			hobbyList += hobbi[i] + " ";
-		}
-	}
-	
-%>
-<table border = "1">
-	<tr>
-		<th>학번</th>
-		<th>이름</th>
-		<th>학년</th>
-		<th>과목</th>
-		<th>취미</th>
-		<th>매모</th>
-	</tr>
-	<tr>
-		<td><%= stuId %></td>
-		<td><%= name %></td>
-		<td><%= grade %></td>
-		<td><%= subject %></td>
-		<td><%= hobbyList %></td>
-		<td><%= memo %></td>
-<%
-}
-catch(Exception e){
-	
-}
+int num = Integer.parseInt(request.getParameter("num"));
+String name = request.getParameter("name");
+String grade = request.getParameter("grade");
+String subject = request.getParameter("subject");
 
-%>	
+String[] hobbies = request.getParameterValues("hobbies");
+String data = Arrays.toString(hobbies);
+String memo = request.getParameter("memo");
+
+if(name.trim().isEmpty() || subject.trim().isEmpty() || hobbies == null || memo.trim().isEmpty()){
+	throw new Exception();
+}
+String hiddenVal = request.getParameter("hiddenValue");
+%>
+<div align="center">
+ <table border="1">
+ 
+ <tr>
+ 	<td>학번</td>
+ 	<td>이름</td>
+ 	<td>학년</td>
+ 	<td>과목</td>
+ 	<td>취미</td>
+ 	<td>메모</td>
+ </tr>
+
+  <tr>
+ 	<td><%=num %></td>
+ 	<td><%=name %></td>
+ 	 <td><%=grade %></td>
+ 	<td><%=subject %></td>
+ 	<td><%=data %></td>
+ 	<td><%=memo %></td>
+ </tr>
+
+ </table>
+
+</div>
+<%
+}catch(Exception e){
+%>
+
+<script>
+alert('비어있는 값이 있습니다');
+// location.href= './ex08form05.jsp';
+// history.go(-1);
+//history.back();
+</script>
+
+<%
+// 자바에서 페이지 이동하는 방법
+// response.sendRedirect("./ex08form05.jsp");
+
+ } %>
 	
-	</tr>
-</table>
 </body>
 </html>

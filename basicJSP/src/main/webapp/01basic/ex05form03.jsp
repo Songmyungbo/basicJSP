@@ -4,24 +4,27 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>값 전달 실습 폼</title>
+<title> 값 전달 실습 폼 </title>
 </head>
 <body>
 
 <form action="./ex06form03pro.jsp" method="get">
-<table border ="1">
+	<table border='1'>
 	<tr>
-	<td>첫번째 수 :</td>
-	<td><input type="number" name="num1" id ="num1"></td>
-	</tr>
+		<td>첫번째 수 : </td>
+		<td> <input type="number" name = "su1"  /> </td>
+	</tr>	
 	<tr>
-	<td>두번째 수 :</td>
-	<td><input type="number" name="num2" id ="num2"></td>
-	</tr>
+		<td>두번째 수 : </td>
+		<td> <input type="number" name = "su2"  /> </td>
+	</tr>	
+	
 	<tr>
-	<td colspan="2"><input type="submit" value="전송"></td>
+		<td colspan="2"> <input type="submit" value="전송" /> </td>
 	</tr>
-</table>
+	</table>
+
 </form>
+
 </body>
 </html>
