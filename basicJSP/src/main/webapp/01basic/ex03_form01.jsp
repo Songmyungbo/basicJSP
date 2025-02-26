@@ -21,7 +21,7 @@
 	    
 	(3) form 안에 잇는 태그들의 속성 중에 name 속성과 value 로 값이 전달이된다 : name 변수이름 value 값  
 	(4) 버튼 type="submit" => 해당 action 페이지로 값들 전달해서 간다
-	      <button> </button> 자동으로 써밋버튼  
+	      <button> </butto  n> 자동으로 써밋버튼  
 
 --%>
 
